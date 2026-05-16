@@ -1,0 +1,13 @@
+sensor_name = "Thermal_Alpha";
+sensor_id=int32(105.8);
+RawData=[10 20 30; 40 50 60; 70 80 90];
+ROI_Data=RawData([1,2] , [2,end]);
+Calibrated_Data=(ROI_Data .^ 2) ./10;
+pad_val=5;
+PadMatrix=repmat(pad_val, 2, 2);
+TransmissionData = horzcat(Calibrated_Data,PadMatrix);
+A=[1 2; 2 2];
+b=[2; 6];
+A_inv=inv(A);
+x=A_inv * b;
+c=trace(A)
